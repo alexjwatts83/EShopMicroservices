@@ -1,13 +1,11 @@
-﻿using Catalog.API.Models;
-
-namespace Catalog.API.Products.Create;
+﻿namespace Catalog.API.Products.Create;
 
 public record CreateProductCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price)
     : ICommand<CreateProductResult>;
 
 public record CreateProductResult(Guid Id);
 
-public class CommandHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
+public class CommandHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
@@ -21,8 +19,9 @@ public class CommandHandler : ICommandHandler<CreateProductCommand, CreateProduc
             Price = command.Price
         };
 
-        // TODO: save to db
+        session.Store(product);
+        await session.SaveChangesAsync(cancellationToken);
 
-        return new CreateProductResult(Guid.NewGuid());
+        return new CreateProductResult(product.Id);
     }
 }
