@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "8c469bf0-0cdc-4251-9375-19a2f8befca0",
+		"name": "EShopMicroservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1585465"
+	},
+	"item": [
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Test 2\",\r\n  \"category\": [\"c1\", \"c2\"],\r\n  \"description\": \"Description of Product A\",\r\n  \"imageFile\": \"producta.jpg\",\r\n  \"price\": 199.0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{catalog_url}}/products",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Catalog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/products",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Basket",
+			"item": []
+		},
+		{
+			"name": "Discount",
+			"item": []
+		},
+		{
+			"name": "Ordering",
+			"item": []
+		}
+	]
+}
