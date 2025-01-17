@@ -1,6 +1,6 @@
 ﻿namespace Catalog.API.Products.Update;
 
-public record UpdateCommand(Guid Id, Guid SomeId, string Name, List<string> Category, string Description, string ImageFile, decimal Price)
+public record UpdateCommand(Guid Id, string Name, List<string> Category, string Description, string ImageFile, decimal Price)
     : ICommand<UpdateResult>;
 public record UpdateResult(bool IsSuccess);
 
