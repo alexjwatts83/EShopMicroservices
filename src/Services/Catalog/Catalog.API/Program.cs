@@ -1,4 +1,5 @@
 
+using Catalog.API.Data;
 using Infrastructure.Exceptions.Handler;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,10 @@ builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
 }).UseLightweightSessions();
+
+// Marten seed data
+if (builder.Environment.IsDevelopment())
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
 
 // Exception Handlers
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
