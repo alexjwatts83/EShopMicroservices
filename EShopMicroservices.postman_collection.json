@@ -10,13 +10,13 @@
 			"name": "Catalog",
 			"item": [
 				{
-					"name": "Create Product",
+					"name": "Create",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Test 2\",\r\n  \"category\": [\"c1\", \"c2\"],\r\n  \"description\": \"Description of Product A\",\r\n  \"imageFile\": \"producta.jpg\",\r\n  \"price\": 199.0\r\n}\r\n",
+							"raw": "{\r\n  \"name\": \"Test 3\",\r\n  \"category\": [\"c3\", \"c4\"],\r\n  \"description\": \"Description of Product test 3\",\r\n  \"imageFile\": \"producta.jpg\",\r\n  \"price\": 199.0\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -36,7 +36,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Catalog",
+					"name": "Get",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -47,6 +47,88 @@
 							],
 							"path": [
 								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/products/01947161-a824-44e8-ae5d-723641abedae",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products",
+								"01947161-a824-44e8-ae5d-723641abedae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/products/category/c5",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products",
+								"category",
+								"c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Test 3\",\r\n  \"category\": [\"c3\", \"c4\"],\r\n  \"description\": \"Description of Product test 3\",\r\n  \"imageFile\": \"producta.jpg\",\r\n  \"price\": 199.0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{catalog_url}}/products/01947161-a824-44e8-ae5d-723641abedae",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products",
+								"01947161-a824-44e8-ae5d-723641abedae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/products/01947193-b6cf-46ca-bb6d-e3fe12895704",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products",
+								"01947193-b6cf-46ca-bb6d-e3fe12895704"
 							]
 						}
 					},

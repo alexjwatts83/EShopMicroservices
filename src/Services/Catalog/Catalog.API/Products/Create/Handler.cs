@@ -1,14 +1,32 @@
-﻿namespace Catalog.API.Products.Create;
+﻿using FluentValidation;
 
-public record CreateProductCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price)
-    : ICommand<CreateProductResult>;
+namespace Catalog.API.Products.Create;
 
-public record CreateProductResult(Guid Id);
+public record CreateCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price)
+    : ICommand<CreateResult>;
 
-internal class CommandHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
+public record CreateResult(Guid Id);
+
+public class CreateValidator : AbstractValidator<CreateCommand>
 {
-    public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
+    public CreateValidator()
     {
+        RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
+        RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");
+        RuleFor(x => x.ImageFile).NotEmpty().WithMessage("ImageFile is required");
+        RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price must be greater than 0");
+    }
+}
+
+internal class CommandHandler(IDocumentSession session, IValidator<CreateCommand> validator) : ICommandHandler<CreateCommand, CreateResult>
+{
+    public async Task<CreateResult> Handle(CreateCommand command, CancellationToken cancellationToken)
+    {
+        var result = await validator.ValidateAsync(command, cancellationToken);
+        if (result.Errors.Count != 0)
+        {
+            throw new ValidationException(result.Errors.Select(x => x.ErrorMessage).ToList().FirstOrDefault());
+        }
         // TODO: change to use AutoMapper
         var product = new Product
         {
@@ -22,6 +40,6 @@ internal class CommandHandler(IDocumentSession session) : ICommandHandler<Create
         session.Store(product);
         await session.SaveChangesAsync(cancellationToken);
 
-        return new CreateProductResult(product.Id);
+        return new CreateResult(product.Id);
     }
 }

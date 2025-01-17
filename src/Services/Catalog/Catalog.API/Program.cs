@@ -1,3 +1,5 @@
+using FluentValidation;
+
 var builder = WebApplication.CreateBuilder(args);
 
 /* Add Services to container and other DI */
@@ -11,6 +13,9 @@ builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
 });
+
+// Fluent Validation
+builder.Services.AddValidatorsFromAssembly(assembly);
 
 // Add Marten
 builder.Services.AddMarten(opts =>
