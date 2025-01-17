@@ -1,5 +1,5 @@
-using FluentValidation;
-using Infrastructure.Behaviors;
+
+using Infrastructure.Exceptions.Handler;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +25,9 @@ builder.Services.AddMarten(opts =>
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
 }).UseLightweightSessions();
 
+// Exception Handlers
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 /* Build the App */
 var app = builder.Build();
 
@@ -32,5 +35,8 @@ var app = builder.Build();
 
 // Carter
 app.MapCarter();
+
+// Use Exceptions
+app.UseExceptionHandler(options => { });
 
 app.Run();
