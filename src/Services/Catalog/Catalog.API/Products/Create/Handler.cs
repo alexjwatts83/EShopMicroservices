@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace Catalog.API.Products.Create;
+﻿namespace Catalog.API.Products.Create;
 
 public record CreateCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price)
     : ICommand<CreateResult>;
@@ -18,13 +16,11 @@ public class CreateValidator : AbstractValidator<CreateCommand>
     }
 }
 
-internal class CreateHandler(IDocumentSession session, ILogger<CreateHandler> logger) : ICommandHandler<CreateCommand, CreateResult>
+internal class CreateHandler(IDocumentSession session) : ICommandHandler<CreateCommand, CreateResult>
 {
     public async Task<CreateResult> Handle(CreateCommand command, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Products.CreateHandler called with {@Command}", command);
-
-        // TODO: change to use AutoMapper
+        // TODO: change to use AutoMapper/Mapster
         var product = new Product
         {
             Name = command.Name,
