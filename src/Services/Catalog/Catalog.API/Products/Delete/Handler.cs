@@ -20,10 +20,12 @@ internal class DeleteHandler(IDocumentSession session, ILogger<DeleteHandler> lo
     {
         logger.LogInformation("Products.DeleteHandler called with {@Command}", command);
 
-        // TODO: Update later to get the product and figure out if it exists or not and then
-        // throw a ProductNotFoundExceltion if not found
+        var product = await session.LoadAsync<Product>(command.Id, cancellationToken);
 
-        session.Delete<Product>(command.Id);
+        if (product == null)
+            throw new ProductNotFoundException();
+
+        session.Delete(product);
 
         await session.SaveChangesAsync(cancellationToken);
 
