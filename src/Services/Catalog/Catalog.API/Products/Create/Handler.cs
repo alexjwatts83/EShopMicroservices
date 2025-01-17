@@ -7,9 +7,9 @@ public record CreateCommand(string Name, List<string> Category, string Descripti
 
 public record CreateResult(Guid Id);
 
-public class CreateValidator : AbstractValidator<CreateCommand>
+public class Validator : AbstractValidator<CreateCommand>
 {
-    public CreateValidator()
+    public Validator()
     {
         RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
         RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");

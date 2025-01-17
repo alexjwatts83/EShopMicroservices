@@ -1,7 +1,7 @@
 ﻿namespace Catalog.API.Products.GetByCategory;
 
 //public record GetProductByCategoryRequest();
-public record GetProductByCategoryResponse(IEnumerable<Product> Products);
+public record GetByCategoryResponse(IEnumerable<Product> Products);
 
 public class Endpoint : ICarterModule
 {
@@ -10,14 +10,14 @@ public class Endpoint : ICarterModule
         app.MapGet("/products/category/{category}",
             async (string category, ISender sender) =>
             {
-                var result = await sender.Send(new GetProductByCategoryQuery(category));
+                var result = await sender.Send(new GetByCategoryQuery(category));
 
-                var response = result.Adapt<GetProductByCategoryResponse>();
+                var response = result.Adapt<GetByCategoryResponse>();
 
                 return Results.Ok(response);
             })
         .WithName("GetProductByCategory")
-        .Produces<GetProductByCategoryResponse>(StatusCodes.Status200OK)
+        .Produces<GetByCategoryResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Get Product By Category")
         .WithDescription("Get Product By Category");

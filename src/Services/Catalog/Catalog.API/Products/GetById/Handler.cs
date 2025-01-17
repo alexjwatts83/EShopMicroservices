@@ -1,13 +1,13 @@
 ﻿
 namespace Catalog.API.Products.GetById;
 
-public record GetProductByIdQuery(Guid Id) : IQuery<GetProductByIdResult>;
-public record GetProductByIdResult(Product Product);
+public record GetByIdQuery(Guid Id) : IQuery<GetByIdResult>;
+public record GetByIdResult(Product Product);
 
 public class GetByIdHandler(IDocumentSession session, ILogger<GetByIdHandler> logger) 
-    : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
+    : IQueryHandler<GetByIdQuery, GetByIdResult>
 {
-    public async Task<GetProductByIdResult> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
+    public async Task<GetByIdResult> Handle(GetByIdQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("Products.GetByIdHandler called with {@Query}", query);
 
@@ -15,6 +15,6 @@ public class GetByIdHandler(IDocumentSession session, ILogger<GetByIdHandler> lo
 
         return product is null 
             ? throw new ProductNotFoundException() 
-            : new GetProductByIdResult(product);
+            : new GetByIdResult(product);
     }
 }

@@ -1,12 +1,12 @@
 ﻿namespace Catalog.API.Products.Delete;
 
-public record DeleteProductCommand(Guid Id) : ICommand<DeleteProductResult>;
-public record DeleteProductResult(bool IsSuccess);
+public record DeleteCommand(Guid Id) : ICommand<DeleteResult>;
+public record DeleteResult(bool IsSuccess);
 
 internal class DeleteHandler(IDocumentSession session, ILogger<DeleteHandler> logger)
-    : ICommandHandler<DeleteProductCommand, DeleteProductResult>
+    : ICommandHandler<DeleteCommand, DeleteResult>
 {
-    public async Task<DeleteProductResult> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
+    public async Task<DeleteResult> Handle(DeleteCommand command, CancellationToken cancellationToken)
     {
         logger.LogInformation("Products.DeleteHandler called with {@Command}", command);
 
@@ -17,6 +17,6 @@ internal class DeleteHandler(IDocumentSession session, ILogger<DeleteHandler> lo
 
         await session.SaveChangesAsync(cancellationToken);
 
-        return new DeleteProductResult(true);
+        return new DeleteResult(true);
     }
 }
