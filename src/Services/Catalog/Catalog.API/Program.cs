@@ -1,4 +1,5 @@
 using FluentValidation;
+using Infrastructure.Behaviors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +13,13 @@ builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
+    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
 });
 
 // Fluent Validation
 builder.Services.AddValidatorsFromAssembly(assembly);
 
-// Add Marten
+// Marten
 builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);

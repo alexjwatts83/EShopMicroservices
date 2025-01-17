@@ -18,15 +18,12 @@ public class CreateValidator : AbstractValidator<CreateCommand>
     }
 }
 
-internal class CommandHandler(IDocumentSession session, IValidator<CreateCommand> validator) : ICommandHandler<CreateCommand, CreateResult>
+internal class CreateHandler(IDocumentSession session, ILogger<CreateHandler> logger) : ICommandHandler<CreateCommand, CreateResult>
 {
     public async Task<CreateResult> Handle(CreateCommand command, CancellationToken cancellationToken)
     {
-        var result = await validator.ValidateAsync(command, cancellationToken);
-        if (result.Errors.Count != 0)
-        {
-            throw new ValidationException(result.Errors.Select(x => x.ErrorMessage).ToList().FirstOrDefault());
-        }
+        logger.LogInformation("Products.CreateHandler called with {@Command}", command);
+
         // TODO: change to use AutoMapper
         var product = new Product
         {
@@ -38,6 +35,7 @@ internal class CommandHandler(IDocumentSession session, IValidator<CreateCommand
         };
 
         session.Store(product);
+
         await session.SaveChangesAsync(cancellationToken);
 
         return new CreateResult(product.Id);
