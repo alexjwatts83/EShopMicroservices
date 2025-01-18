@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Test 3\",\r\n  \"category\": [\"c3\", \"c4\"],\r\n  \"description\": \"Description of Product test 3\",\r\n  \"imageFile\": \"producta.jpg\",\r\n  \"price\": 199.0\r\n}\r\n",
+							"raw": "{\r\n  \"name\": \"Pickles\",\r\n  \"category\": [\"c3\", \"c4\"],\r\n  \"description\": \"Some description\",\r\n  \"imageFile\": \"image.png\",\r\n  \"price\": 199.9\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,12 +41,22 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{catalog_url}}/products",
+							"raw": "{{catalog_url}}/products?pageNumber=1&pageSize=10",
 							"host": [
 								"{{catalog_url}}"
 							],
 							"path": [
 								"products"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -58,13 +68,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{catalog_url}}/products/01947161-a824-44e8-ae5d-723641abedae",
+							"raw": "{{catalog_url}}/products/5334c996-8457-4cf0-815c-ed2b77c4ff61",
 							"host": [
 								"{{catalog_url}}"
 							],
 							"path": [
 								"products",
-								"01947161-a824-44e8-ae5d-723641abedae"
+								"5334c996-8457-4cf0-815c-ed2b77c4ff61"
 							]
 						}
 					},
@@ -76,14 +86,24 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{catalog_url}}/products/category/c5",
+							"raw": "{{catalog_url}}/products/category/c3?pageNumber=1&pageSize=2",
 							"host": [
 								"{{catalog_url}}"
 							],
 							"path": [
 								"products",
 								"category",
-								"c5"
+								"c3"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -96,7 +116,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Test 3\",\r\n  \"category\": [\"c3\", \"c4\"],\r\n  \"description\": \"Description of Product test 3\",\r\n  \"imageFile\": \"producta.jpg\",\r\n  \"price\": 199.0\r\n}\r\n",
+							"raw": "{\r\n  \"id\": \"019473a8-9df7-4ba6-95af-28c31658fd52\",\r\n  \"name\": \"Again with the pciles updated\",\r\n  \"category\": [\"c3\", \"c4\"],\r\n  \"description\": \"Description of Product test 3\",\r\n  \"imageFile\": \"producta.jpg\",\r\n  \"price\": 1.9\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,13 +124,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{catalog_url}}/products/01947161-a824-44e8-ae5d-723641abedae",
+							"raw": "{{catalog_url}}/products",
 							"host": [
 								"{{catalog_url}}"
 							],
 							"path": [
-								"products",
-								"01947161-a824-44e8-ae5d-723641abedae"
+								"products"
 							]
 						}
 					},
@@ -122,13 +141,30 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{catalog_url}}/products/01947193-b6cf-46ca-bb6d-e3fe12895704",
+							"raw": "{{catalog_url}}/products/019473a8-9df7-4ba6-95af-28c31658fd52",
 							"host": [
 								"{{catalog_url}}"
 							],
 							"path": [
 								"products",
-								"01947193-b6cf-46ca-bb6d-e3fe12895704"
+								"019473a8-9df7-4ba6-95af-28c31658fd52"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/health",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"health"
 							]
 						}
 					},
@@ -138,7 +174,87 @@
 		},
 		{
 			"name": "Basket",
-			"item": []
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"Cart\": \r\n        {\r\n            \"UserName\": \"swn2\",\r\n            \"Items\": [\r\n                {\r\n                \"Quantity\": 2,\r\n                \"Color\": \"Red\",\r\n                \"Price\": 500,\r\n                \"ProductId\": \"5334c996-8457-4cf0-815c-ed2b77c4ff61\",\r\n                \"ProductName\": \"IPhone X\"\r\n                },\r\n                {\r\n                \"Quantity\": 1,\r\n                \"Color\": \"Blue\",\r\n                \"Price\": 500,\r\n                \"ProductId\": \"c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914\",\r\n                \"ProductName\": \"Samsung 10\"\r\n                }\r\n            ]  \r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{basket_url}}/basket",
+							"host": [
+								"{{basket_url}}"
+							],
+							"path": [
+								"basket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{basket_url}}/basket/swn2",
+							"host": [
+								"{{basket_url}}"
+							],
+							"path": [
+								"basket",
+								"swn2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{basket_url}}/basket/swn",
+							"host": [
+								"{{basket_url}}"
+							],
+							"path": [
+								"basket",
+								"swn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{basket_url}}/health",
+							"host": [
+								"{{basket_url}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Discount",
