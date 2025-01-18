@@ -12,16 +12,16 @@ public class Validator : AbstractValidator<Command>
     }
 }
 
-public class Handler : ICommandHandler<Command, Result>
+public class Handler(IBasketRepository repository) : ICommandHandler<Command, Result>
 {
     public async Task<Result> Handle(Command command, CancellationToken cancellationToken)
     {
         var cart = command.Cart;
 
-        // TODO: store in db
+        await repository.StoreBasket(cart, cancellationToken);
 
         // TODO: update cache
 
-        return new Result("swn");
+        return new Result(cart.UserName);
     }
 }

@@ -1,4 +1,3 @@
-
 using Catalog.API.Data;
 using HealthChecks.UI.Client;
 using Infrastructure.Exceptions.Handler;

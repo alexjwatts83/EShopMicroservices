@@ -1,3 +1,5 @@
+using Infrastructure.Exceptions.Handler;
+
 var builder = WebApplication.CreateBuilder(args);
 
 /******************************************/
@@ -19,6 +21,21 @@ builder.Services.AddMediatR(config =>
 // Fluent Validation
 builder.Services.AddValidatorsFromAssembly(assembly);
 
+// Marten
+builder.Services.AddMarten(opts =>
+{
+    opts.Connection(builder.Configuration.GetConnectionString("Database")!);
+
+    opts.Schema.For<ShoppingCart>().Identity(x => x.UserName);
+}).UseLightweightSessions();
+
+// TODO: maybe consider creating an extension method to build up all the data related services
+// Add Services
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
+// Exception Handlers
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 /*****************/
 /* Build the App */
 /*****************/
@@ -30,5 +47,8 @@ var app = builder.Build();
 
 // Carter
 app.MapCarter();
+
+// Use Exceptions
+app.UseExceptionHandler(options => { });
 
 app.Run();

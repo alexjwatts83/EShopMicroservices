@@ -11,11 +11,12 @@ public class Validator : AbstractValidator<Command>
     }
 }
 
-public class CommandHandler : ICommandHandler<Command, Result>
+public class CommandHandler(IBasketRepository repository) : ICommandHandler<Command, Result>
 {
     public async Task<Result> Handle(Command command, CancellationToken cancellationToken)
     {
-        // TODO: delete basket from database and cache       
+        // TODO: delete basket from cache
+        await repository.DeleteBasket(command.UserName, cancellationToken);
 
         return new Result(true);
     }
