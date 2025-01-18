@@ -32,6 +32,14 @@ builder.Services.AddMarten(opts =>
 // TODO: maybe consider creating an extension method to build up all the data related services
 // Add Services
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
+
+// Add Redis
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    //options.InstanceName = "Basket";
+});
 
 // Exception Handlers
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
