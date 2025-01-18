@@ -1,4 +1,6 @@
+using HealthChecks.UI.Client;
 using Infrastructure.Exceptions.Handler;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +46,11 @@ builder.Services.AddStackExchangeRedisCache(options =>
 // Exception Handlers
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+// Health Checks
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
+
 /*****************/
 /* Build the App */
 /*****************/
@@ -56,7 +63,14 @@ var app = builder.Build();
 // Carter
 app.MapCarter();
 
-// Use Exceptions
+// Exceptions
 app.UseExceptionHandler(options => { });
+
+// Health Checks
+app.UseHealthChecks("/health",
+    new HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
 
 app.Run();
