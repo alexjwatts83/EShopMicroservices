@@ -14,6 +14,10 @@ public class DiscountContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Coupon>()
+            .HasIndex(u => u.ProductName)
+            .IsUnique();
+
         modelBuilder
             .Entity<Coupon>()
             .HasData(

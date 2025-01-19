@@ -35,6 +35,12 @@ namespace Discount.Grpc.Migrations
                     { 1, 150, "IPhone Discount", "IPhone X" },
                     { 2, 100, "Samsung Discount", "Samsung 10" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Coupons_ProductName",
+                table: "Coupons",
+                column: "ProductName",
+                unique: true);
         }
 
         /// <inheritdoc />
