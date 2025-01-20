@@ -17,4 +17,23 @@ internal static class OrderExtensions
             status: orderDto.Status
         );
     }
+
+    internal static OrderDto ToDto(this Order order)
+    {
+        return new OrderDto(
+            Id: order.Id.Value,
+            CustomerId: order.CustomerId.Value,
+            OrderName: order.OrderName.Value,
+            ShippingAddress: order.ShippingAddress.ToDto(),
+            BillingAddress: order.BillingAddress.ToDto(),
+            Payment: order.Payment.ToDto(),
+            Status: order.Status,
+            OrderItems: order.OrderItems.Select(item => item.ToDto()).ToList()
+        );
+    }
+
+    internal static IEnumerable<OrderDto> ToOrderDtoList(this IEnumerable<Order> orders)
+    {
+        return orders.Select(order => order.ToDto());
+    }
 }

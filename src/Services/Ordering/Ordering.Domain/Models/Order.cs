@@ -56,7 +56,7 @@ public class Order : Aggregate<OrderId>
 
         _orderItems.Add(orderItem);
 
-        AddDomainEvent(new OrderItemAddedEvent(this, orderItem));
+        //AddDomainEvent(new OrderItemAddedEvent(this, orderItem));
     }
 
     public void RemoveItem(ProductId productId)
@@ -68,6 +68,6 @@ public class Order : Aggregate<OrderId>
 
         _orderItems.Remove(orderItem);
 
-        AddDomainEvent(new OrderItemRemovedEvent(this, orderItem));
+        //AddDomainEvent(new OrderItemRemovedEvent(this, orderItem));
     }
 }
