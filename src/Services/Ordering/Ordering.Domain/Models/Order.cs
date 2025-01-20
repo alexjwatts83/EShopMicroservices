@@ -20,7 +20,6 @@ public class Order : Aggregate<OrderId>
     public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
     {
         // Since all the value objects passed in have their own validation, all the values should be valid before it gets to this point
-
         var order = new Order
         {
             Id = id,
@@ -54,12 +53,13 @@ public class Order : Aggregate<OrderId>
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
 
         var orderItem = new OrderItem(Id, productId, quantity, price);
+
         _orderItems.Add(orderItem);
 
         AddDomainEvent(new OrderItemAddedEvent(this, orderItem));
     }
 
-    public void Remove(ProductId productId)
+    public void RemoveItem(ProductId productId)
     {
         var orderItem = _orderItems.FirstOrDefault(x => x.ProductId == productId);
 
@@ -67,6 +67,7 @@ public class Order : Aggregate<OrderId>
             return;
 
         _orderItems.Remove(orderItem);
+
         AddDomainEvent(new OrderItemRemovedEvent(this, orderItem));
     }
 }
