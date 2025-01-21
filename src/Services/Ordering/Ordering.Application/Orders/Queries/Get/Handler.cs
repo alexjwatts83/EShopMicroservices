@@ -10,7 +10,9 @@ public class Handler(IApplicationDbContext dbContext)
         // get orders with pagination
         // return result
 
-        var pageNumber = query.PaginationRequest.PageNumber;
+        var pageNumber = query.PaginationRequest.PageNumber <= 0 
+            ? 1 
+            : query.PaginationRequest.PageNumber;
         var pageSize = query.PaginationRequest.PageSize;
 
         var totalCount = await dbContext.Orders.LongCountAsync(cancellationToken);
@@ -18,7 +20,7 @@ public class Handler(IApplicationDbContext dbContext)
         var orders = await dbContext.Orders
                        .Include(o => o.OrderItems)
                        .OrderBy(o => o.OrderName.Value)
-                       .Skip(pageSize * pageNumber)
+                       .Skip(pageSize * (pageNumber - 1))
                        .Take(pageSize)
                        .ToListAsync(cancellationToken);
 

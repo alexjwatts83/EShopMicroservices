@@ -6,6 +6,6 @@ public class CreatedEventHandler(ILogger<CreatedEventHandler> logger) : INotific
     {
         logger.LogInformation("Domain Event handled: {DomainEvent}", domainEvent.GetType().Name);
 
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }
