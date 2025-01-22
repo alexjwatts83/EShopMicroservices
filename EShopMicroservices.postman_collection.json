@@ -182,7 +182,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"Cart\": \r\n        {\r\n            \"UserName\": \"swn4\",\r\n            \"Items\": [\r\n                {\r\n                \"Quantity\": 2,\r\n                \"Color\": \"Red\",\r\n                \"Price\": 500,\r\n                \"ProductId\": \"5334c996-8457-4cf0-815c-ed2b77c4ff61\",\r\n                \"ProductName\": \"IPhone X\"\r\n                },\r\n                {\r\n                \"Quantity\": 1,\r\n                \"Color\": \"Blue\",\r\n                \"Price\": 500,\r\n                \"ProductId\": \"c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914\",\r\n                \"ProductName\": \"Samsung 10\"\r\n                }\r\n            ]  \r\n        }\r\n}",
+							"raw": "{\r\n\t\"Cart\": \r\n        {\r\n            \"UserName\": \"swn04\",\r\n            \"Items\": [\r\n                {\r\n                \"Quantity\": 2,\r\n                \"Color\": \"Red\",\r\n                \"Price\": 500,\r\n                \"ProductId\": \"5334c996-8457-4cf0-815c-ed2b77c4ff61\",\r\n                \"ProductName\": \"IPhone X\"\r\n                },\r\n                {\r\n                \"Quantity\": 1,\r\n                \"Color\": \"Blue\",\r\n                \"Price\": 500,\r\n                \"ProductId\": \"c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914\",\r\n                \"ProductName\": \"Samsung 10\"\r\n                }\r\n            ]  \r\n        }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -207,13 +207,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{basket_url}}/basket/swn4",
+							"raw": "{{basket_url}}/basket/swn04",
 							"host": [
 								"{{basket_url}}"
 							],
 							"path": [
 								"basket",
-								"swn4"
+								"swn04"
 							]
 						}
 					},
@@ -225,13 +225,40 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{basket_url}}/basket/swn4",
+							"raw": "{{basket_url}}/basket/swn04",
 							"host": [
 								"{{basket_url}}"
 							],
 							"path": [
 								"basket",
-								"swn4"
+								"swn04"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"CheckoutDto\": \r\n        {\r\n\t\t  \"userName\": \"swn04\",\r\n\t\t  \"CustomerId\": \"189dc8dc-990f-48e0-a37b-e6f2b60b9d7d\",\r\n\t\t  \"totalPrice\": 0,\r\n\t\t  \"firstName\": \"swn1\",\r\n\t\t  \"lastName\": \"swn2\",\r\n\t\t  \"emailAddress\": \"test@test.com\",\r\n\t\t  \"addressLine\": \"34 Charles Street\",\r\n\t\t  \"country\": \"USA\",\r\n\t\t  \"state\": \"Michigan\",\r\n\t\t  \"zipCode\": \"48198\",\r\n\t\t  \"cardName\": \"swn4\",\r\n\t\t  \"cardNumber\": \"485-3184\",\r\n\t\t  \"expiration\": \"11/30\",\r\n\t\t  \"cvv\": \"333\",\r\n\t\t  \"paymentMethod\": 1\r\n\t\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{basket_url}}/basket/checkout",
+							"host": [
+								"{{basket_url}}"
+							],
+							"path": [
+								"basket",
+								"checkout"
 							]
 						}
 					},
@@ -296,13 +323,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{ordering_url}}/orders/ORD_3",
+							"raw": "{{ordering_url}}/orders/swn04",
 							"host": [
 								"{{ordering_url}}"
 							],
 							"path": [
 								"orders",
-								"ORD_3"
+								"swn04"
 							]
 						}
 					},
