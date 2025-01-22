@@ -7,8 +7,8 @@ namespace Infrastructure.Messaging.MassTransit;
 
 public static class Extensions
 {
-    public static IServiceCollection AddMessageBroker
-        (this IServiceCollection services, IConfiguration configuration, Assembly? assembly = null)
+    public static IServiceCollection AddMessageBroker(this IServiceCollection services, IConfiguration configuration,
+        Assembly? assembly = null)
     {
         services.AddMassTransit(config =>
         {

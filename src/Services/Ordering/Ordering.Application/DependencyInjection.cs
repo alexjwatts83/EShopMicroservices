@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Behaviors;
+using Infrastructure.Messaging.MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -15,6 +16,9 @@ public static class DependencyInjection
             config.AddOpenBehavior(typeof(ValidationBehavior<,>));
             config.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
+
+        // Async Communication Services as Consumer
+        services.AddMessageBroker(configuration, Assembly.GetExecutingAssembly());
 
         return services;
     }

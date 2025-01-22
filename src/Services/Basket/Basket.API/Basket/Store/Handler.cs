@@ -26,8 +26,6 @@ public class Handler(IBasketRepository repository, DiscounClient discountClient)
 
         await repository.StoreBasket(cart, cancellationToken);
 
-        // TODO: update cache
-
         return new Result(cart.UserName);
     }
 

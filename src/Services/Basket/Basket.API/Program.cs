@@ -63,7 +63,7 @@ builder.Services
         return handler;
     });
 
-//Async Communication Services
+// Async Communication Services as Producer
 builder.Services.AddMessageBroker(builder.Configuration);
 
 // Exception Handlers
