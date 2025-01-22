@@ -1,6 +1,7 @@
 using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Infrastructure.Exceptions.Handler;
+using Infrastructure.Messaging.MassTransit;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,21 +46,25 @@ builder.Services.AddStackExchangeRedisCache(options =>
 });
 
 // Grpc Services
-builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
-{
-    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
-})
-.ConfigurePrimaryHttpMessageHandler(() =>
-{
-    // TODO figure out later how to not use the following for production
-    // as the work around to get it to work is to prevent it from working
-    var handler = new HttpClientHandler
+builder.Services
+    .AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
     {
-        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-    };
+        options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+    })
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        // TODO figure out later how to not use the following for production
+        // as the work around to get it to work is to prevent it from working
+        var handler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
 
-    return handler;
-});
+        return handler;
+    });
+
+//Async Communication Services
+builder.Services.AddMessageBroker(builder.Configuration);
 
 // Exception Handlers
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
