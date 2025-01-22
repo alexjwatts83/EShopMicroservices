@@ -12,7 +12,15 @@ public class CheckoutEventHandler(ISender sender, ILogger<CheckoutEventHandler> 
 
         var command = MapToCreateOrderCommand(context.Message);
 
-        await sender.Send(command);
+        try
+        {
+            await sender.Send(command);
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Fail level 100");
+        }
+        
     }
 
     private static CreateOrder.Command MapToCreateOrderCommand(BasketCheckoutEvent message)
