@@ -1,7 +1,6 @@
 ﻿using Basket.API.Basket.Dtos;
 using Infrastructure.Messaging.Events;
 using MassTransit;
-using MassTransit.Transports;
 
 namespace Basket.API.Basket.Checkout;
 
