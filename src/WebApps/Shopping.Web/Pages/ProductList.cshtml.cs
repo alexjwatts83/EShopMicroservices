@@ -1,11 +1,8 @@
 namespace Shopping.Web.Pages;
 
-public class ProductListModel(ICatalogService catalogService, IBasketService basketService, ILogger<ProductListModel> logger)
-    : PageModel
+public class ProductListModel(ICatalogService catalogService, IBasketService basketService, ISafeUserService safeUserService,
+    ILogger<ProductListModel> logger) : PageModel
 {
-    // TODO get the user name from the http context or from a safeuser service        
-    private readonly string _userName = "swn05";
-
     public IEnumerable<string> CategoryList { get; set; } = [];
     public IEnumerable<ProductModel> ProductList { get; set; } = [];
 
@@ -40,7 +37,7 @@ public class ProductListModel(ICatalogService catalogService, IBasketService bas
 
         var productResponse = await catalogService.GetProduct(productId);
 
-        var basket = await basketService.LoadUserBasket(_userName);
+        var basket = await basketService.LoadUserBasket(safeUserService.GetUserName());
 
         basket.Items.Add(new ShoppingCartItemModel
         {

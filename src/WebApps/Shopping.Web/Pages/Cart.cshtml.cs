@@ -1,17 +1,12 @@
 namespace Shopping.Web.Pages;
 
-public class CartModel(IBasketService basketService, ILogger<CartModel> logger) : PageModel
+public class CartModel(IBasketService basketService, ISafeUserService safeUserService, ILogger<CartModel> logger) : PageModel
 {
-    // TODO get the user name from the http context or from a safeuser service        
-    private readonly string _userName = "swn05";
-
     public ShoppingCartModel Cart { get; set; } = new ShoppingCartModel();
 
     public async Task<IActionResult> OnGetAsync()
     {
-        
-
-        Cart = await basketService.LoadUserBasket(_userName);
+        Cart = await basketService.LoadUserBasket(safeUserService.GetUserName());
 
         return Page();
     }
@@ -20,7 +15,7 @@ public class CartModel(IBasketService basketService, ILogger<CartModel> logger) 
     {
         logger.LogInformation("Remove to cart button clicked");
 
-        Cart = await basketService.LoadUserBasket(_userName);
+        Cart = await basketService.LoadUserBasket(safeUserService.GetUserName());
 
         Cart.Items.RemoveAll(x => x.ProductId == productId);
 
