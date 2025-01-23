@@ -424,6 +424,444 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "YarpApiGateway",
+			"item": [
+				{
+					"name": "Catalog",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Pickles\",\r\n  \"category\": [\"c3\", \"c4\"],\r\n  \"description\": \"Some description\",\r\n  \"imageFile\": \"image.png\",\r\n  \"price\": 199.9\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{yarp_url}}/catalog-service/products",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"catalog-service",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/catalog-service/products?pageNumber=1&pageSize=50",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"catalog-service",
+										"products"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/catalog-service/products/019490a8-be3b-43ac-be38-74a797a88ddb",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"catalog-service",
+										"products",
+										"019490a8-be3b-43ac-be38-74a797a88ddb"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/catalog-service/products/category/c3?pageNumber=1&pageSize=2",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"catalog-service",
+										"products",
+										"category",
+										"c3"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"019490a8-be3b-43ac-be38-74a797a88ddb\",\r\n  \"name\": \"Again with the pickles updated\",\r\n  \"category\": [\"c3\", \"c4\"],\r\n  \"description\": \"Description of Product test 3\",\r\n  \"imageFile\": \"producta.jpg\",\r\n  \"price\": 1.9\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{yarp_url}}/catalog-service/products",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"catalog-service",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/catalog-service/products/019490a8-be3b-43ac-be38-74a797a88ddb",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"catalog-service",
+										"products",
+										"019490a8-be3b-43ac-be38-74a797a88ddb"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Health Check",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/catalog-service/health",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"catalog-service",
+										"health"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Basket",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"Cart\": \r\n        {\r\n            \"UserName\": \"swn04\",\r\n            \"Items\": [\r\n                {\r\n                \"Quantity\": 2,\r\n                \"Color\": \"Red\",\r\n                \"Price\": 500,\r\n                \"ProductId\": \"5334c996-8457-4cf0-815c-ed2b77c4ff61\",\r\n                \"ProductName\": \"IPhone X\"\r\n                },\r\n                {\r\n                \"Quantity\": 1,\r\n                \"Color\": \"Blue\",\r\n                \"Price\": 500,\r\n                \"ProductId\": \"c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914\",\r\n                \"ProductName\": \"Samsung 10\"\r\n                }\r\n            ]  \r\n        }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{yarp_url}}/basket-service/basket",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"basket-service",
+										"basket"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/basket-service/basket/swn04",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"basket-service",
+										"basket",
+										"swn04"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/basket-service/basket/swn04",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"basket-service",
+										"basket",
+										"swn04"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Checkout",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"CheckoutDto\": \r\n        {\r\n\t\t  \"userName\": \"swn04\",\r\n\t\t  \"CustomerId\": \"189dc8dc-990f-48e0-a37b-e6f2b60b9d7d\",\r\n\t\t  \"totalPrice\": 0,\r\n\t\t  \"firstName\": \"swn1\",\r\n\t\t  \"lastName\": \"swn2\",\r\n\t\t  \"emailAddress\": \"test@test.com\",\r\n\t\t  \"addressLine\": \"34 Charles Street\",\r\n\t\t  \"country\": \"USA\",\r\n\t\t  \"state\": \"Michigan\",\r\n\t\t  \"zipCode\": \"48198\",\r\n\t\t  \"cardName\": \"swn4\",\r\n\t\t  \"cardNumber\": \"485-3184\",\r\n\t\t  \"expiration\": \"11/30\",\r\n\t\t  \"cvv\": \"333\",\r\n\t\t  \"paymentMethod\": 1\r\n\t\t}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{yarp_url}}/basket-service/basket/checkout",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"basket-service",
+										"basket",
+										"checkout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Health",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/basket-service/health",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"basket-service",
+										"health"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Ordering",
+					"item": [
+						{
+							"name": "Get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/ordering-service/orders?pageNumber=1&pageSize=10",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"ordering-service",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By Name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/ordering-service/orders/swn04",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"ordering-service",
+										"orders",
+										"swn04"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By Customer",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/ordering-service/orders/customer/189dc8dc-990f-48e0-a37b-e6f2b60b9d7d",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"ordering-service",
+										"orders",
+										"customer",
+										"189dc8dc-990f-48e0-a37b-e6f2b60b9d7d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"order\": {\r\n        \"customerId\": \"58c49479-ec65-4de2-86e7-033c546291aa\",\r\n        \"orderName\": \"ORD_3\",\r\n        \"shippingAddress\": {\r\n            \"firstName\": \"mehmet\",\r\n            \"lastName\": \"ozkaya\",\r\n            \"emailAddress\": \"mehmet@gmail.com\",\r\n            \"addressLine\": \"Bahcelievler No:4\",\r\n            \"country\": \"Turkey\",\r\n            \"state\": \"Istanbul\",\r\n            \"zipCode\": \"38050\"\r\n        },\r\n        \"billingAddress\": {\r\n            \"firstName\": \"mehmet\",\r\n            \"lastName\": \"ozkaya\",\r\n            \"emailAddress\": \"mehmet@gmail.com\",\r\n            \"addressLine\": \"Bahcelievler No:4\",\r\n            \"country\": \"Turkey\",\r\n            \"state\": \"Istanbul\",\r\n            \"zipCode\": \"38050\"\r\n        },\r\n        \"payment\": {\r\n            \"cardName\": \"mehmet\",\r\n            \"cardNumber\": \"5555555555554444\",\r\n            \"expiration\": \"12/28\",\r\n            \"cvv\": \"355\",\r\n            \"paymentMethod\": 1\r\n        },\r\n        \"status\": 2,\r\n        \"orderItems\": [\r\n            {\r\n                \"orderId\": \"0dc016f0-0b7f-4fa0-ac0e-f1bc8cd415f1\",\r\n                \"productId\": \"5334c996-8457-4cf0-815c-ed2b77c4ff61\",\r\n                \"quantity\": 2,\r\n                \"price\": 500.00\r\n            },\r\n            {\r\n                \"orderId\": \"0dc016f0-0b7f-4fa0-ac0e-f1bc8cd415f1\",\r\n                \"productId\": \"c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914\",\r\n                \"quantity\": 1,\r\n                \"price\": 400.00\r\n            }\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{yarp_url}}/ordering-service/orders",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"ordering-service",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"order\": {\r\n        \"id\": \"b955e6af-f54e-4661-9266-19f2d365749e\",\r\n        \"customerId\": \"58c49479-ec65-4de2-86e7-033c546291aa\",\r\n        \"orderName\": \"ORD_3\",\r\n        \"shippingAddress\": {\r\n            \"firstName\": \"Jerry\",\r\n            \"lastName\": \"Brantner\",\r\n            \"emailAddress\": \"brayan.trant@hotmail.com\",\r\n            \"addressLine\": \"1360 Oakwood Avenue\",\r\n            \"country\": \"United States\",\r\n            \"state\": \"New York\",\r\n            \"zipCode\": \"10018\"\r\n        },\r\n        \"billingAddress\": {\r\n            \"firstName\": \"Jerry\",\r\n            \"lastName\": \"Brantner\",\r\n            \"emailAddress\": \"brayan.trant@hotmail.com\",\r\n            \"addressLine\": \"565 Augusta Park\",\r\n            \"country\": \"United States\",\r\n            \"state\": \"West Virginia\",\r\n            \"zipCode\": \"26205\"\r\n        },\r\n        \"payment\": {\r\n            \"cardName\": \"Jerry M Brantner\",\r\n            \"cardNumber\": \"375417240621097\",\r\n            \"expiration\": \"06/28\",\r\n            \"cvv\": \"342\",\r\n            \"paymentMethod\": 1\r\n        },\r\n        \"status\": 2\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{yarp_url}}/ordering-service/orders",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"ordering-service",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Health",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{yarp_url}}/ordering-service/health",
+									"host": [
+										"{{yarp_url}}"
+									],
+									"path": [
+										"ordering-service",
+										"health"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		}
 	]
 }
