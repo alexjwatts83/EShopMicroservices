@@ -13,6 +13,8 @@ public class ProductDetailModel(ICatalogService catalogService, IBasketService b
 
     public async Task<IActionResult> OnGetAsync(Guid productId)
     {
+        logger.LogInformation("Product Detail page visited");
+
         var response = await catalogService.GetProduct(productId);
 
         Product = response.Product;
@@ -41,5 +43,4 @@ public class ProductDetailModel(ICatalogService catalogService, IBasketService b
 
         return RedirectToPage("Cart");
     }
-}
 }

@@ -6,6 +6,8 @@ public class CartModel(IBasketService basketService, ISafeUserService safeUserSe
 
     public async Task<IActionResult> OnGetAsync()
     {
+        logger.LogInformation("Cart page visited");
+
         Cart = await basketService.LoadUserBasket(safeUserService.GetUserName());
 
         return Page();
